@@ -107,7 +107,7 @@ public class GetFlickrJsonData extends AsyncTask<String, Void, List<Photo>> impl
                 status = DownloadStatus.FAILED_OR_EMPTY;
             }
         }
-        if(runningOnSameThread && mCallback != null) {
+        if(runningOnSameThread  && mCallback != null) {
             // now inform the caller processing is done - possibly returning null if there
             mCallback.onDataAvailable(mPhotoList, status);
         }

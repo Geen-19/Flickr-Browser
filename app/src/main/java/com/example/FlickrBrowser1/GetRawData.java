@@ -31,12 +31,15 @@ public class GetRawData extends AsyncTask<String, Void, String> {
     }
     void runInSameThread(String s){
         Log.d(TAG, "runInSameThread: starts");
-
+        Log.d(TAG, "runInSameThread: the destinationUri we get "+ s);
 //        onPostExecute(doInBackground(s));
         if(mCallback != null) {
-//            String result = doInBackground(s);
-//            mCallback.onDownloadComplete(result, mDownloadStatus);
-            mCallback.onDownloadComplete(doInBackground(s), mDownloadStatus);
+
+            String result = doInBackground(s);
+            Log.d(TAG, "runInSameThread: result " +result);
+            mCallback.onDownloadComplete(result, mDownloadStatus);
+            //OR
+//          mCallback.onDownloadComplete(doInBackground(s), mDownloadStatus);
         }
 
         Log.d(TAG, "runInSameThread: ends");
@@ -44,7 +47,7 @@ public class GetRawData extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String s) {
-//        Log.d(TAG, "onPostExecute: parameter = "+s);
+       Log.d(TAG, "onPostExecute: parameter = "+s);
         if(mCallback != null) {
             mCallback.onDownloadComplete(s, mDownloadStatus);
         }
@@ -78,9 +81,10 @@ public class GetRawData extends AsyncTask<String, Void, String> {
             for(line = reader.readLine() ; line!= null; line = reader.readLine()){
                 result.append(line).append("\n");
             }
-
+            Log.d(TAG, "doInBackground: result: "+ result.toString());
             mDownloadStatus = DownloadStatus.OK;
             return result.toString();
+
 
         } catch (MalformedURLException e) {
             Log.e(TAG, "doInBackground: Invalid URL"+ e.getMessage());

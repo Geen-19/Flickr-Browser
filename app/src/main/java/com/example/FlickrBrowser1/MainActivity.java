@@ -3,7 +3,6 @@ package com.example.FlickrBrowser1;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -11,8 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.Toolbar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -52,7 +49,7 @@ public class MainActivity extends BaseActivity implements GetFlickrJsonData.OnDa
         String queryResult = sharedPreferences.getString(FLICKR_QUERY,"");
 
         if(queryResult.length() > 0) {
-            GetFlickrJsonData getFlickrJsonData = new GetFlickrJsonData(this, "https://www.flickr.com/services/feeds/photos_public.gne","en-us",true );
+            GetFlickrJsonData getFlickrJsonData = new GetFlickrJsonData(this, "https://www.flickr.com/services/feeds/photos_public.gne","en-us",false);
             getFlickrJsonData.execute(queryResult);
         }
         //getFlickrJsonData.executeOnSameThread("android , nougat");
